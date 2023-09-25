@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+from Clases.alumno import Alumno
 # Comprobamos si existen los archivos JSON para manipular la informacions
 # En caso de no existir creamos los archivos en el mismo directorio
 def crear_archivos_json():
@@ -24,24 +25,110 @@ crear_archivos_json()
 
 # Definimos las funciones de las diferentes opciones
 def crear_alumno():
-    print("")
-    pass
+    # Recogemos los datos del alumno
+    print("------------Crear un nuevo alumno------------")
+    dni = input("DNI: ")
+    nombre = input("Nombre: ")
+    apellido = input("Apellido: ")
+    edad = int(input("Edad: "))
+    fecha_nacimiento = input("Fecha de nacimiento: ")
+    # Creamos una nueva instancia del Alumno
+    nuevo_alumno = Alumno(dni, nombre, apellido, edad, fecha_nacimiento)
+    # Creamos un array vacio de alumnos
+    alumnos = [] 
+    # Comprobamos que el archivo existe y cargamos los alumnos que ya habian
+    with open("alumnos.json", 'r') as file:
+        alumnos = json.load(file)
+    # Guardamos el nuevo alumno en un diccionario
+    alumnos.append(nuevo_alumno.to_dict())
+    # Escribimos los nuevos alumnos en el fichero
+    with open("alumnos.json", 'w') as file:
+        json.dump(alumnos, file, indent=4)
+    print("------------Nuevo alumno creado------------")
 
-def mostrar_alumno():
-    print("")
-    pass
+def buscar_alumno():
+    dni_a_buscar = input("Dni del alumno a buscar:")
+    # Creamos un array vacio de alumnos
+    alumnos = []
+    # Leemos el fichero con al informacion de todos los alumnos
+    with open("alumnos.json", 'r') as file:
+            alumnos = json.load(file)
+    # Miramos si el dni existe entre todos los alumnos
+    for alumno in alumnos:
+        if alumno["dni"] == dni_a_buscar:
+            alumno_encontrado = alumno
+            break
+    # Comprobamos si se ha encontrado un alumno con ese dni
+    if alumno_encontrado:
+        print("-----Se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
+        print("Nombre: ", alumno_encontrado["nombre"])
+        print("Apellido: ", alumno_encontrado["apellido"])
+        print("Edad: ", alumno_encontrado["edad"])
+        print("Fecha nacimiento: ", alumno_encontrado["fecha_nac"])
+        print("-------------------------------------")
+    else:
+        print("-----No se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
 
 def mostrar_todos_alumnos():
-    print("")
-    pass
+    print("Lista de todos los alumnos:")
+    # Creamos un array vacio de alumnos
+    alumnos = [] 
+    # Leemos todos los datos de los alumnos del fichero
+    with open("alumnos.json", 'r') as file:
+        alumnos = json.load(file)
+    # Bucle para imprimir todos los alumnos
+    for alumno in alumnos:
+        print("-----ALUMNO CON DNI:", alumno["dni"], "-----")
+        print("Nombre: ", alumno["nombre"])
+        print("Apellido: ", alumno["apellido"])
+        print("Edad: ", alumno["edad"])
+        print("Fecha nacimiento: ", alumno["fecha_nac"])
+        print("-------------------------------------")
 
 def actualizar_alumno():
-    print("")
-    pass
+    dni_a_buscar = input("Dni del alumno a buscar:")
+    # Creamos un array vacio de alumnos
+    alumnos = []
+    # Leemos el fichero con al informacion de todos los alumnos
+    with open("alumnos.json", 'r') as file:
+            alumnos = json.load(file)
+    # Miramos si el dni existe entre todos los alumnos
+    for alumno in alumnos:
+        if alumno["dni"] == dni_a_buscar:
+            alumno_encontrado = alumno
+            break
+    # Comprobamos si se ha encontrado un alumno con ese dni
+    if alumno_encontrado:
+        print("-----Se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
+        # FALTA POR ACTUALIZAR EL ALUMNO
+        
+        print("-------------------------------------")
+    else:
+        print("-----No se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
 
 def eliminar_alumno():
-    print("")
-    pass
+    # Recogemos el dni del alumno a eliminar
+    print("-----Eliminar alumno-----")
+    dni_a_eliminar = input("Ingrese el DNI del alumno que desea eliminar: ")
+    # Creamos un array vacio de alumnos
+    alumnos = [] 
+    # Leemos el fichero con al informacion de todos los alumnos
+    with open("alumnos.json", 'r') as file:
+            alumnos = json.load(file)
+    # Miramos si el dni existe entre todos los alumnos
+    for alumno in alumnos:
+        if alumno["dni"] == dni_a_eliminar:
+            alumno_encontrado = alumno
+            break
+    # Comprobamos si se ha encontrado un alumno con ese dni
+    if alumno_encontrado:
+        alumnos.remove(alumno_encontrado)
+        # Actualizamos la informacion con los alumnos actuales
+        with open("alumnos.json", 'w') as file:
+            json.dump(alumnos, file, indent=4)
+        print("-----Se ha eliminado el alumno con el dni:", dni_a_eliminar, "-----")
+    else:
+        print("-----No se ha eliminado el alumno con el dni:", dni_a_eliminar, "-----")
 
 def salir_del_programa():
     print("Hasta la proxima")
@@ -50,25 +137,25 @@ def salir_del_programa():
 # Hacemos un diccionario para guardar las posibles opciones
 opciones = {
     "1": crear_alumno,
-    "2": mostrar_alumno,
+    "2": buscar_alumno,
     "3": mostrar_todos_alumnos,
     "4": actualizar_alumno,
     "5": eliminar_alumno,
-    "6": salir_del_programa
+    "0": salir_del_programa
 }
 
 while True:
     # Menu a mostra en la linea de comnados
     print("======  Menú ======")
     print("1. Crear alumno")
-    print("2. Listar informacion del alumno")
+    print("2. Buscar alumno")
     print("3. Listar todos los alumnos")
     print("4. Actualizar alumno")
     print("5. Eliminar alumno")
-    print("6. Salir")
+    print("0. Salir")
 
     # Recogemos la opcion que ha escrito el usuario
-    opcion = input("Selecciona una opcion: ")
+    opcion = input("Selecciona una opcion: ").strip() 
 
     if opcion in opciones:
         # Llamamos a la funcion dependiendo de la opcion escogida

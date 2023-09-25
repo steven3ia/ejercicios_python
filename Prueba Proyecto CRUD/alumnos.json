@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "dni": "987654321A",
+        "nombre": "Mikel",
+        "apellido": "Matilla",
+        "edad": 22,
+        "fecha_nac": "2003-08-04"
+    },
+    {
+        "dni": "543216789F",
+        "nombre": "Unai",
+        "apellido": "Urtiaga",
+        "edad": 22,
+        "fecha_nac": "2002-07-06"
+    }
+]
