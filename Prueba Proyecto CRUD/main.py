@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
-from Clases.alumno import Alumno
+from model.alumno import Alumno
 # Comprobamos si existen los archivos JSON para manipular la informacions
 # En caso de no existir creamos los archivos en el mismo directorio
 def crear_archivos_json():
@@ -100,9 +100,24 @@ def actualizar_alumno():
     # Comprobamos si se ha encontrado un alumno con ese dni
     if alumno_encontrado:
         print("-----Se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
-        # FALTA POR ACTUALIZAR EL ALUMNO
-        
-        print("-------------------------------------")
+        # Recogemos los nuevos datos para actualizar el alumno
+        nombre = input("Nombre: ")
+        apellido = input("Apellido: ")
+        edad = int(input("Edad: "))
+        fecha_nacimiento = input("Fecha de nacimiento: ")
+        # Creamos una nueva instancia del Alumno
+        nuevo_alumno = Alumno(dni_a_buscar, nombre, apellido, edad, fecha_nacimiento)
+        # Creamos un array vacio de alumnos
+        alumnos = [] 
+        # Comprobamos que el archivo existe y cargamos los alumnos que ya habian
+        with open("alumnos.json", 'r') as file:
+            alumnos = json.load(file)
+        # Guardamos el nuevo alumno en un diccionario
+        alumnos.append(nuevo_alumno.to_dict())
+        # Escribimos los nuevos alumnos en el fichero
+        with open("alumnos.json", 'w') as file:
+            json.dump(alumnos, file, indent=4)
+        print("-----------Alumno acutalizado---------------")
     else:
         print("-----No se ha encontrado el alumno con el dni:", dni_a_buscar, "-----")
 
@@ -111,7 +126,8 @@ def eliminar_alumno():
     print("-----Eliminar alumno-----")
     dni_a_eliminar = input("Ingrese el DNI del alumno que desea eliminar: ")
     # Creamos un array vacio de alumnos
-    alumnos = [] 
+    alumnos = []
+    alumno_encontrado = None 
     # Leemos el fichero con al informacion de todos los alumnos
     with open("alumnos.json", 'r') as file:
             alumnos = json.load(file)

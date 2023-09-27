@@ -12,5 +12,12 @@
         "apellido": "Urtiaga",
         "edad": 22,
         "fecha_nac": "2002-07-06"
+    },
+    {
+        "dni": "987654321A",
+        "nombre": "Mikel",
+        "apellido": "Matilla Wachin",
+        "edad": 21,
+        "fecha_nac": "2001-08-09"
     }
 ]
