@@ -2,10 +2,10 @@
 
 # EJERCICIO 3
 
-subjects = ["Matemáticas", "Física", "Química", "Historia", "Lengua"]
-scores = []
-for subject in subjects:
-    score = input("¿Qué nota has sacado en " + subject + "?")
-    scores.append(score)
-for i in range(len(subjects)):
-    print("En " + subjects[i] + " has sacado " + scores[i])
+asignaturas = ["Matemáticas", "Física", "Química", "Historia", "Lengua"]
+nota = []
+for asignatura in asignaturas:
+    nota = input("¿Qué nota has sacado en " + asignatura + "?")
+    nota.append(nota)
+for i in range(len(asignaturas)):
+    print("En " + asignaturas[i] + " has sacado " + nota[i])

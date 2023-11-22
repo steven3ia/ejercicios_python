@@ -5,18 +5,18 @@ from model.alumno import Alumno
 # Comprobamos si existen los archivos JSON para manipular la informacions
 # En caso de no existir creamos los archivos en el mismo directorio
 def crear_archivos_json():
-    if not os.path.exists("alumnos.json"):
-        with open("alumnos.json", 'w') as file:
+    if not os.path.exists("data/alumnos.json"):
+        with open("data/alumnos.json", 'w') as file:
             json.dump([], file)
-        print(f"Se ha creado el archivo alumnos.json")
+        print(f"Se ha creado el archivo data/alumnos.json")
 
-    if not os.path.exists("asignaturas.json"):
-        with open("asignaturas.json", 'w') as file:
+    if not os.path.exists("data/asignaturas.json"):
+        with open("data/asignaturas.json", 'w') as file:
             json.dump([], file)
         print(f"Se ha creado el archivo asignaturas.json")
 
-    if not os.path.exists("notas.json"):
-        with open("notas.json", 'w') as file:
+    if not os.path.exists("data/notas.json"):
+        with open("data/notas.json", 'w') as file:
             json.dump([], file)
         print(f"Se ha creado el archivo notas.json")
 
@@ -37,13 +37,13 @@ def crear_alumno():
     # Creamos un array vacio de alumnos
     alumnos = [] 
     # Comprobamos que el archivo existe y cargamos los alumnos que ya habian
-    with open("alumnos.json", 'r') as file:
+    with open("data/alumnos.json", 'r') as file:
         alumnos = json.load(file)
     # Guardamos el nuevo alumno en un diccionario
     alumnos.append(nuevo_alumno.to_dict())
     # Escribimos los nuevos alumnos en el fichero
-    with open("alumnos.json", 'w') as file:
-        json.dump(alumnos, file, indent=4)
+    with open("data/alumnos.json", 'w') as file:
+        json.dump(nuevo_alumno, file, indent=4)
     print("------------Nuevo alumno creado------------")
 
 def buscar_alumno():
@@ -51,7 +51,7 @@ def buscar_alumno():
     # Creamos un array vacio de alumnos
     alumnos = []
     # Leemos el fichero con al informacion de todos los alumnos
-    with open("alumnos.json", 'r') as file:
+    with open("data/alumnos.json", 'r') as file:
             alumnos = json.load(file)
     # Miramos si el dni existe entre todos los alumnos
     for alumno in alumnos:
@@ -74,7 +74,7 @@ def mostrar_todos_alumnos():
     # Creamos un array vacio de alumnos
     alumnos = [] 
     # Leemos todos los datos de los alumnos del fichero
-    with open("alumnos.json", 'r') as file:
+    with open("data/alumnos.json", 'r') as file:
         alumnos = json.load(file)
     # Bucle para imprimir todos los alumnos
     for alumno in alumnos:
@@ -90,7 +90,7 @@ def actualizar_alumno():
     # Creamos un array vacio de alumnos
     alumnos = []
     # Leemos el fichero con al informacion de todos los alumnos
-    with open("alumnos.json", 'r') as file:
+    with open("data/data/alumnos.json", 'r') as file:
             alumnos = json.load(file)
     # Miramos si el dni existe entre todos los alumnos
     for alumno in alumnos:
@@ -110,12 +110,12 @@ def actualizar_alumno():
         # Creamos un array vacio de alumnos
         alumnos = [] 
         # Comprobamos que el archivo existe y cargamos los alumnos que ya habian
-        with open("alumnos.json", 'r') as file:
+        with open("data/alumnos.json", 'r') as file:
             alumnos = json.load(file)
         # Guardamos el nuevo alumno en un diccionario
         alumnos.append(nuevo_alumno.to_dict())
         # Escribimos los nuevos alumnos en el fichero
-        with open("alumnos.json", 'w') as file:
+        with open("data/alumnos.json", 'w') as file:
             json.dump(alumnos, file, indent=4)
         print("-----------Alumno acutalizado---------------")
     else:
@@ -129,7 +129,7 @@ def eliminar_alumno():
     alumnos = []
     alumno_encontrado = None 
     # Leemos el fichero con al informacion de todos los alumnos
-    with open("alumnos.json", 'r') as file:
+    with open("data/alumnos.json", 'r') as file:
             alumnos = json.load(file)
     # Miramos si el dni existe entre todos los alumnos
     for alumno in alumnos:
@@ -140,7 +140,7 @@ def eliminar_alumno():
     if alumno_encontrado:
         alumnos.remove(alumno_encontrado)
         # Actualizamos la informacion con los alumnos actuales
-        with open("alumnos.json", 'w') as file:
+        with open("data/alumnos.json", 'w') as file:
             json.dump(alumnos, file, indent=4)
         print("-----Se ha eliminado el alumno con el dni:", dni_a_eliminar, "-----")
     else:
