@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 from scipy import stats
 
 # DATASET AGE AND SPEED OF 14 CARS
-# x_points = [5,7,8,7,2,17,2,9,4,11,12,9,6]
-# y_points = [99,86,87,88,111,86,103,87,94,78,77,85,86]
+x_points = np.array([5, 7, 8, 7, 2, 17, 2, 9, 4, 11, 12, 9, 6])
+y_points = np.array([99, 86, 87, 88, 111, 86, 103, 87, 94, 78, 77, 85, 86])
 
 # Using np.random.randint (lowest integer, size=(int or tuple of ints))
-x_points = np.random.randint(20, size=(14))
-y_points = np.random.randint(120, size=(14))
+# x_points = np.random.randint(20, size=(14))
+# y_points = np.random.randint(120, size=(14))
 
 # TEST DATA
 # linspace generates 100 spaced points in the interval
