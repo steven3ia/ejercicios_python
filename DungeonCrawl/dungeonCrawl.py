@@ -1,10 +1,13 @@
 from MapGrid import MapGrid
 
 map = MapGrid()
-
 map.create_grid()
 map.get_walls()
+map.draw_grid()
+map.start_path_exist()
 
+
+"""
 while (map.player_x, map.player_y) != (map.end_x, map.end_y):
     # dibujar el mapa
     map.draw_grid()
@@ -13,3 +16,4 @@ while (map.player_x, map.player_y) != (map.end_x, map.end_y):
     # mover al jugador
     map.move_player(movement)
 print("You made it to the end!")
+"""
